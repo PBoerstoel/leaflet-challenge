@@ -7,8 +7,8 @@ let mag=[]
 let popups=[]
 function colorf(depth) {
     if (depth <= 10) {return("yellow")
-    } else if (10<depth<=50) {return("green")
-    } else if (50<depth<=100) {return("red")
+    } else if (depth<=50) {return("green")
+    } else if (depth<=100) {return("red")
     } else if (depth>100) {return("black")}
 };
 d3.json(queryurl).then(function(data) {
@@ -24,7 +24,7 @@ d3.json(queryurl).then(function(data) {
             radius: Math.sqrt(mag[i])*10000
         }));
 
-        quakes[i].bindPopup(`felt by ${data.features[i].properties.felt}, ${data.features[i].properties.place}, at ${new Date(data.features[i].properties.time)}`)
+        quakes[i].bindPopup(`Magnitude: ${mag[i]}, lat/long: ${long[i]}/${lat[i]}, Depth ${depth[i]}`)
     };
 
     
@@ -55,6 +55,7 @@ d3.json(queryurl).then(function(data) {
     L.control.layers(baseMaps, overlayMaps, {
     collapsed: false
     }).addTo(myMap);
+
 
 });
 
